@@ -2,50 +2,56 @@
 import React, { useReducer, useRef, useState } from "react";
 import { FormField,TextInput } from 'grommet';
 import { TextField } from '@mui/material';
-import {formReducer ,INITIAL_STATE } from './UseReduceer';
-import { NextPlan } from "@mui/icons-material";
+import { PRODUCT_STATE,AddProductReducer } from './UseReduceer'
+const AddProduct = () => {
+
+const [state, dispatch] = useReducer(AddProductReducer, PRODUCT_STATE)
+    
+const handleChange = (e) => { 
+dispatch({
+    type:"ADD_PRODUCT",
+    playload:{name:e.target.name,
+        value:e.target.value}
+})
 
 
-const FormReduce = () => {
-    const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
- 
-    const handleChange = (e) => {
-        dispatch({
-          type: "CHANGE_INPUT",
-          payload: { name: e.target.name, value: e.target.value },
-        });
-      };
- 
-      const submit = (e)=>{
-        e.preventDefault();
+ }
 
-        console.log(state)
-      }
- 
-    return (
+
+ const submit = (e) => { 
+    e.preventDefault();
+    console.log(state)
+
+  }
+return (
+    
+    
     <div>
-        <form onSubmit={submit} >
+
+
+<form onSubmit={submit} >
         <TextField
-        name='name'
+        name='productName'
         onChange={handleChange}
          id="standard-basic" label="Name" variant="standard" /><br />
 
         <TextField
-        name='fatherName'
+        name='price'
+        type="number"
         onChange={handleChange}
         id="standard-basic" label="fatherName" variant="standard" /><br />
 
         <TextField
-        name='email'
+        name='ProducdDec'
         onChange={handleChange}
         id="standard-basic" label="email" variant="standard" /><br />
 
         <TextField
-        name='age'
+        name='productDetail'
         onChange={handleChange}
-         type="number" id="standard-basic" label="age" variant="standard" /><br />
+         id="standard-basic" label="age" variant="standard" /><br />
         <TextField
-        name='tag'
+        name='productSpec'
         onChange={handleChange}
         id="standard-basic" label="tag" variant="standard" /><br />
         
@@ -55,4 +61,4 @@ const FormReduce = () => {
   )
 }
 
-export default FormReduce
+export default AddProduct
