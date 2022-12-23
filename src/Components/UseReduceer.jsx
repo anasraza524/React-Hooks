@@ -60,21 +60,28 @@ export  const AddProductReducer = (state,action)=> {
 const [data, setData] = useState(null)
 const [error, setError] = useState(null)
 
-useEffect(() => {
-    try{
-        let response= axios.get(url)
-        setData(response)
-     }
-     catch (error) {
-         console.log(error.response); // this is the main part. Use the response property from the error object
-         setError(error)
+
+useEffect(()=>{ 
+   (async()=>{ 
+    
+        const response= await axios.get(url)
+      
+            setData(response)
          
-       }
+        
+        
+     
+    }
+    
+    
+    )()
+    
+    
+    ; 
+    },[url]);
 
-  
-}, [url])
 
 
-return [data,error]
+return {data}
 
       }
